@@ -1,5 +1,5 @@
 import { test, expect, vi } from "vitest";
-import { getUsers, getUsers2, getUsersAxios,getEmployeesAxios } from "../src/userService";
+import { getUsers, getUsers2, getUsersAxios,getEmployeesAxios } from "../vitest-practice/src/userService";
 import axios from "axios";
 vi.mock("axios");
 test("should fetch users", async () => {

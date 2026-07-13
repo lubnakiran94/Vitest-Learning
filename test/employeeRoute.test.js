@@ -1,6 +1,6 @@
 import request from "supertest";
 import { test, expect, beforeEach} from "vitest";
-import app, { resetEmployees } from "../src/employeeRoutes" ;
+import app, { resetEmployees } from "../vitest-practice/src/employeeRoutes" ;
 
 beforeEach(() => {
     resetEmployees();
