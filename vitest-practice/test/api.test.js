@@ -1,5 +1,5 @@
 import { test, expect, vi } from "vitest";
-import { getUsers, getProducts } from "../vitest-practice/src/api";
+import { getUsers, getProducts } from "../src/api";
 
 vi.mock("../src/api", () => {
     return {

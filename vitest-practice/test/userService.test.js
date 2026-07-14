@@ -1,11 +1,16 @@
-import { test, expect, vi } from "vitest";
-import { getUsers, getUsers2, getUsersAxios,getEmployeesAxios } from "../vitest-practice/src/userService";
+import { test, expect, vi, beforeEach } from "vitest";
+import { getUsers, getUsers2, getUsersAxios, getEmployeesAxios }  from "../src/userService";
 import axios from "axios";
 vi.mock("axios");
+
+beforeEach(() => {
+    vi.resetAllMocks();
+});
+
 test("should fetch users", async () => {
     global.fetch = vi.fn();
 
-    global.fetch.mockedResolvedValue({
+    global.fetch.mockResolvedValue({
         ok: true,
         json: async () => [
              { id: 1, name: "Ali" },
@@ -22,7 +27,7 @@ test("should fetch users", async () => {
 
 })
 
-test("should fetch users", async () => {
+test("should not fetch users", async () => {
     global.fetch = vi.fn();
 
     global.fetch.mockRejectedValue(
@@ -58,7 +63,7 @@ test("Should throw API Error for 404 response", async () => {
 
 });
 
-test("Should fetch users", async () => {
+test("Should fetch mock users", async () => {
 
     axios.get.mockResolvedValue({
         data: [
@@ -100,7 +105,7 @@ test("Should fetch employees", async () => {
 
 });
 
-test("should fetch users", async () => {
+test("should give server error", async () => {
    axios.get.mockRejectedValue(
     new Error("Server Error")
 );
@@ -108,6 +113,7 @@ test("should fetch users", async () => {
 await expect(getEmployeesAxios())
     .rejects
     .toThrow("Server Error");
-    expect(fetch).toHaveBeenCalledTimes(1);
+     expect(axios.get).toHaveBeenCalledTimes(1);
+    expect(axios.get).toHaveBeenCalledWith("/employees");
 
 })
